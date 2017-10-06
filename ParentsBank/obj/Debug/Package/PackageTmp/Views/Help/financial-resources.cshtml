@@ -1,0 +1,58 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<body>
+
+    <div class="container">
+
+        <!-- The justified navigation menu is meant for single line per list item.
+             Multiple lines will require custom code not provided by Bootstrap. -->
+        <div class="masthead">
+            <h3 class="text-muted">Financial Resources</h3>
+            
+        </div>
+
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+            <h1>Learn More about saving money</h1>
+            <p class="lead">Rich people stay rich by living like they're broke. Broke people stay broke because they stay like they're rich!</p>
+            <p><a class="btn btn-lg btn-success"  role="button"> @Html.ActionLink("           Take a step to be Rich", "Index", "Accounts")</a></p>
+        </div>
+
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>For children</h2>
+                <p><a href="http://www.kidsfinance.com/links.html" target="_blank">Kids' Finance</a></p>
+                <p><em>This is a site dedicated to teaching financial responsibility to kids.</em></p>
+                <p><a href="http://www.prosperity4kids.com/links.shtml" target="_blank">Prosperity4Kids</a></p>
+                <p><em>Here are resources and links to teach children financial literacy.</em></p>
+                <p><a href="http://kidsandmoney.com/links/" target="_blank">Kids and Money</a></p>
+                <p><em>This site has links to several resources, from allowance calculators to budgeting, investing, and more.</em></p>
+                <p><a href="http://www.kidsturncentral.com/links/moneylinks.htm" target="_blank">Kids' Turn Central</a></p>
+                <p><em>This is a collection of money and economics resources online.</em></p>
+            </div>
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <h2>For Parents</h2>
+                <p><a href="http://www.cefe.illinois.edu/links/#links13" target="_blank">Center for Economic &amp; Financial Education</a> (CEFE)</p>
+                <p><em>This site includes information on banking, the Federal Reserve, U.S. Mint, and U.S. Treasury.</em></p>
+                <p><a href="http://senseanddollars.thinkport.org/links/" target="_blank">Sense and Dollars</a></p>
+                <p><em>Maryland Public Television has compiled a list of money websites.</em></p>
+                <p><a href="http://credit.org/links/" target="_blank">Credit.org</a></p>
+                <p><em>The consumer resources presented here include many sites dedicated to financial education.</em></p>
+                <p><a href="http://www.nebankers.org/index.php/links1/financial-links-for-kid-and-adults.html#.UYFGUuJ-xko" target="_blank">Nebraska Bankers Association</a></p>
+                <p><em>These financial links for adults.</em></p>
+                <p><a href="http://parenting-ed.org/for-parents/links-for-parents/" target="_blank">Center for Effective Parenting</a></p>
+                <p><em>The resources offered here are for general parenting information, including teaching children about money.</em></p>    
+            </div>
+        </div>
+
+
+    </div> <!-- /container -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>

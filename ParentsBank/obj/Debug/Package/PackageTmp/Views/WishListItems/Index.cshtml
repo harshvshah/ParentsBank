@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ParentsBank.Models.WishListItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Search", "WishListItems", FormMethod.Get))
+{
+    <div class="form-horizontal">
+        <div class="form-group" style="margin-left:-1px;">
+            @Html.Label("listname", "Search for a Wish List Item", htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-12" style="margin-left:-1px;">
+                @Html.Editor("listname", new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+    </div>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.Name)
+        </th>
+        <th>
+           Date Added
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Purchased)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateAdded)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Link)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Purchased)
+        </td>
+        <td width="20%" align="right">
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) 
+            @if (item.Account.IsOwner(User.Identity.Name)) {
+            @Html.ActionLink(" | Delete", "Delete", new { id = item.Id })}
+        </td>
+    </tr>
+}
+
+</table>

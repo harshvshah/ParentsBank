@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\ParentsBank",
+    "\\ParentsBank\\Controllers",
+    "\\ParentsBank\\Views",
+    "\\ParentsBank\\Views\\Accounts",
+    "\\ParentsBank\\Views\\Transactions"
+  ],
+  "SelectedNode": "\\ParentsBank\\Views\\Accounts\\Index.cshtml",
+  "PreviewInSolutionExplorer": false
+}

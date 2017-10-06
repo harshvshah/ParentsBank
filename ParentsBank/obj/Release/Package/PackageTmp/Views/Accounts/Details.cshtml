@@ -1,0 +1,232 @@
+﻿@model ParentsBank.Models.Account
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Account Details</h2>
+    
+<div>
+    <h4>Account</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Owner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Owner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Recipient)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Recipient)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OpenDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpenDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.InterestRate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.InterestRate)
+        </dd>
+
+    </dl>
+</div>
+
+<hr />
+
+<h3>Transactions (@Html.ActionLink("Add Transaction", "create", new { controller = "Transactions", Id = Model.Id }))</h3>
+@{ 
+
+    var TotalBalance = Model.Balance;
+    var TotalInterest = Model.CalculateEndofYearPrincipalandInterestAmount();
+
+    var Total = TotalBalance + TotalInterest;
+
+    var percent = TotalBalance / Total * 100;
+
+    if (TotalInterest > 10)
+    {
+
+        <div class="alert alert-success">
+            <strong>Awesome!</strong> You have already earned more than 10$ in Interest.
+        </div>
+    }
+
+}
+<div class="container">
+    <div class="progress">
+        <div id="test123" class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+            <span class="sr-only"></span>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById("test123").style = "width: "+@percent+"%";
+</script>
+
+
+
+@if (Model.Transactions == null || Model.Transactions.Count == 0)
+{
+    <div class="alert alert-info">No transactions to display</div>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Recipient</th>
+                <th>Transaction Date</th>
+                <th>Amount</th>
+                <th colspan="2">View transaction</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.Transactions)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(p.Account.Recipient, "Details", new { controller = "Transactions", Id = p.Id })
+                    </td>
+                    <td>@p.TransactionDate</td>
+                    <td>
+                       
+                       
+                            @p.Amount
+                        
+                       
+                    </td>
+                    <td colspan="2">@Html.ActionLink("Transaction Details", "Details", new {controller ="Transactions", Id = p.Id })</td>
+                </tr>
+            }
+            <tr>
+                <td><strong>Total</strong></td>
+                <td></td>
+                <td>
+                    <strong>
+                       
+                            @Model.Balance
+
+                      
+                    </strong>
+                </td>
+                <td><strong>Total Interest Earned</strong></td>
+                
+                <td>
+                    <strong>
+                      
+                            @Model.CalculateEndofYearPrincipalandInterestAmount()
+
+                        
+                    </strong>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <strong>Total Amount including Interest</strong>
+                </td>
+                <td colspan="3">
+                    <strong>
+                        @Total
+                    </strong>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+}
+
+
+
+<hr />
+
+<h3>WishList Items (@Html.ActionLink("Add Wishlist Items", "create", new { controller = "WishListItems", AccountId = Model.Id }))</h3>
+
+
+
+@if (Model.WishListItems == null || Model.WishListItems.Count == 0)
+{
+    <div class="alert alert-info">No transactions to display</div>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Recipient</th>
+                <th>URL</th>
+                <th>Cost</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in Model.WishListItems)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(p.Account.Owner, "Details", new { controller = "WishListItems", Id = p.Id })
+                    </td>
+                    <td><a href="@p.Link">Click here</a></td>
+                    <td>
+                        @* Only show the salary if the user is an owner *@
+                        @if (Model.IsOwner(User.Identity.Name))
+                        {
+                            @p.Cost
+                        }
+                        else
+                        {
+                            <span>N/A</span>
+                        }
+                    </td>
+                    @if (p.Cost < Total)
+                    {
+                    <td style="background-color:lightgreen">
+                       
+                        Affordable
+                    </td>
+                    }
+                    else
+                    {
+                    <td style="background-color:indianred">Not Affordable</td>
+                    }
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+}
+
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+
+
+
+
+
